@@ -8,7 +8,7 @@ const projectsData = [
     title: 'Kshan Restaurant',
     description: 'A modern, responsive restaurant website offering digital menu browsing, table reservations, and an immersive user interface for customers.',
     techStack: ['Next.js', 'React', 'Tailwind CSS', 'Framer Motion'],
-    liveUrl: 'https://kshan-restaurant.vercel.app', 
+    liveUrl: 'https://www.kshanrestaurant.in/', 
     githubUrl: '', 
     status: 'Private Project' // Case 1: Private Code, Public Website
   },
