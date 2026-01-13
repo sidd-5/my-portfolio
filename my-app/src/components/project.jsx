@@ -5,34 +5,44 @@ import { motion } from 'framer-motion';
 // --- YOUR PROJECTS DATA ---
 const projectsData = [
   {
+    title: 'Kshan Restaurant',
+    description: 'A modern, responsive restaurant website offering digital menu browsing, table reservations, and an immersive user interface for customers.',
+    techStack: ['Next.js', 'React', 'Tailwind CSS', 'Framer Motion'],
+    liveUrl: 'https://kshan-restaurant.vercel.app', 
+    githubUrl: '', 
+    status: 'Private Project' // Case 1: Private Code, Public Website
+  },
+  {
     title: 'Doctor Appointment Booking',
     description: 'A complete solution for booking doctor appointments online. Features include appointment scheduling, and appointment management.',
     techStack: ['Next.js', 'Express.js', 'MongoDB', 'Tailwind CSS'],
     liveUrl: 'https://doctor-website-eta.vercel.app/',
     githubUrl: 'https://github.com/sidd-5/doctor-website',
+    status: 'Public' // Case 2: Public Code, Public Website
+  },
+  {
+    title: 'Internal ERP System',
+    description: 'A comprehensive Enterprise Resource Planning system designed for internal business operations, inventory tracking, and employee management.',
+    techStack: ['Next.js', 'PostgreSQL', 'Docker', 'AWS'],
+    liveUrl: '', // No URL provided
+    githubUrl: '', // No Code provided
+    status: 'Confidential' // Case 3: Private Code, Private Website (New Category)
   },
   {
     title: 'Ralph Lauren Clone',
-    description: 'Created a Ralph Lauren e-commerce website clone with fully responsive design.',
-    techStack: ['React','Express', 'Tailwind CSS'],
+    description: 'Created a Ralph Lauren e-commerce website clone with fully responsive design and shopping cart functionality.',
+    techStack: ['React', 'Express', 'Tailwind CSS'],
     liveUrl: 'https://ralph-lauren-theta.vercel.app/',
     githubUrl: 'https://github.com/sidd-5/Ralph_Lauren',
+    status: 'Public'
   },
   {
     title: 'Petfit - Pet Care Services',
     description: 'A platform offering a range of pet care services, including grooming, boarding, and veterinary care.',
-    techStack: ['Next.js'],
+    techStack: ['Next.js', 'Framer Motion'],
     liveUrl: '',
     githubUrl: '',
-    status: 'In Development'
-  },
-   {
-    title: 'School Website',
-    description: 'A school website that provides information about the institution, its programs, admission procedures and course details.',
-    techStack: ['HTML', 'CSS', 'JavaScript', 'Bootstrap','PHP', 'MySQL'],
-    liveUrl: '',
-    githubUrl: '',
-    status: 'Private Project'
+    status: 'In Development' // Case 4: No Links yet because it's incomplete
   },
   {
     title: 'Hostel Management System',
@@ -40,7 +50,7 @@ const projectsData = [
     techStack: ['React', 'Next.js'],
     liveUrl: '',
     githubUrl: '',
-    status: 'Private Project'
+    status: 'Confidential' // Fully Private
   }
 ];
 
@@ -57,9 +67,30 @@ const GitHubIcon = () => (
     </svg>
 );
 
+const LockIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+    </svg>
+);
+
 // --- HELPER FUNCTIONS ---
 const isValidUrl = (url) => {
   return url && url !== '' && url !== '#' && !url.includes('localhost');
+};
+
+const getStatusColor = (status) => {
+  switch (status) {
+    case 'Public':
+      return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+    case 'Private Project':
+      return 'bg-rose-50 text-rose-700 border-rose-200';
+    case 'Confidential': // New color for Confidential
+      return 'bg-purple-50 text-purple-700 border-purple-200';
+    case 'In Development':
+      return 'bg-amber-50 text-amber-700 border-amber-200';
+    default:
+      return 'bg-slate-50 text-slate-700 border-slate-200';
+  }
 };
 
 export default function Projects() {
@@ -68,10 +99,7 @@ export default function Projects() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        duration: 0.6,
-        staggerChildren: 0.1
-      }
+      transition: { duration: 0.6, staggerChildren: 0.1 }
     }
   };
 
@@ -80,10 +108,7 @@ export default function Projects() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut"
-      }
+      transition: { duration: 0.6, ease: "easeOut" }
     }
   };
 
@@ -93,10 +118,7 @@ export default function Projects() {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut"
-      }
+      transition: { duration: 0.5, ease: "easeOut" }
     }
   };
 
@@ -105,10 +127,7 @@ export default function Projects() {
       y: -8,
       scale: 1.02,
       boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-      transition: {
-        duration: 0.3,
-        ease: "easeOut"
-      }
+      transition: { duration: 0.3, ease: "easeOut" }
     }
   };
 
@@ -160,7 +179,7 @@ export default function Projects() {
                   <h3 className="text-xl font-semibold text-slate-900">{project.title}</h3>
                   {project.status && (
                     <motion.span
-                      className="ml-2 inline-block bg-amber-50 text-amber-800 text-xs font-semibold px-2.5 py-1 rounded-full border border-amber-200 whitespace-nowrap"
+                      className={`ml-2 inline-block text-xs font-semibold px-2.5 py-1 rounded-full border whitespace-nowrap ${getStatusColor(project.status)}`}
                       initial={{ opacity: 0, scale: 0.8 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       transition={{ delay: index * 0.1 + 0.4 }}
@@ -170,7 +189,7 @@ export default function Projects() {
                     </motion.span>
                   )}
                 </motion.div>
-                 
+                  
                 <motion.p
                   className="mt-3 text-slate-600"
                   initial={{ opacity: 0 }}
@@ -214,7 +233,7 @@ export default function Projects() {
                 transition={{ delay: index * 0.1 + 0.8 }}
                 viewport={{ once: true }}
               >
-                {/* Live Demo Button or Status */}
+                {/* Live Demo Logic */}
                 {isValidUrl(project.liveUrl) ? (
                   <motion.a 
                     href={project.liveUrl} 
@@ -227,14 +246,21 @@ export default function Projects() {
                     <LinkIcon />
                     Live Demo
                   </motion.a>
+                ) : project.status === 'Confidential' ? (
+                  // New "Private Access" State for Confidential Projects
+                  <span className="inline-flex items-center gap-x-2 text-sm font-medium text-purple-700/70 cursor-not-allowed">
+                    <LockIcon />
+                    Private Access
+                  </span>
                 ) : (
-                  <span className="inline-flex items-center gap-x-2 text-sm font-medium text-gray-500">
-                    <div className="w-5 h-5 rounded-full bg-gray-300"></div>
-                    No Live Demo
+                  // Default "No Demo" for others (e.g., In Development)
+                  <span className="inline-flex items-center gap-x-2 text-sm font-medium text-gray-400 cursor-not-allowed">
+                    <div className="w-2 h-2 rounded-full bg-gray-300"></div>
+                    No Demo
                   </span>
                 )}
 
-                {/* GitHub Button or Status */}
+                {/* GitHub Logic */}
                 {isValidUrl(project.githubUrl) ? (
                   <motion.a 
                     href={project.githubUrl} 
@@ -248,8 +274,8 @@ export default function Projects() {
                     Source Code
                   </motion.a>
                 ) : (
-                  <span className="inline-flex items-center gap-x-2 text-sm font-medium text-gray-500">
-                    <div className="w-5 h-5 rounded-full bg-gray-300"></div>
+                  <span className="inline-flex items-center gap-x-2 text-sm font-medium text-gray-400 cursor-not-allowed">
+                    <LockIcon />
                     Private Code
                   </span>
                 )}
